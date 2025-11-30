@@ -1,5 +1,5 @@
 # TriNav™ — Multi-Phase Navigation System  
-© 2025 Mark — All Rights Reserved.
+© 2025 Mark Roberts & Design52 — All Rights Reserved.
 
 TriNav™ is a custom-designed, three-phase navigation system with a hybrid
 hamburger/dual-arrow icon and a progressive-reveal sidebar interaction model.
@@ -151,5 +151,6 @@ For inquiries regarding permissions or licensing changes, use GitHub Issues or y
 ## 📌 Version
 
 **TriNav™ v1.0 — 2025**
+
 
 
