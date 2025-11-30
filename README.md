@@ -137,7 +137,7 @@ No reproduction, distribution, modification, commercial use, or reuse is permitt
 
 **Created by:** Mark Roberts
 **Assisted by:** ChatGPT (design assistant)
-*** Develeped By:***  Design52.uk
+**Develeped By:**  Design52.uk
 TriNav™ is an original UI innovation designed to modernise and enhance multi-stage navigation systems.
 
 ---
@@ -151,4 +151,5 @@ For inquiries regarding permissions or licensing changes, use GitHub Issues or y
 ## 📌 Version
 
 **TriNav™ v1.0 — 2025**
+
 
