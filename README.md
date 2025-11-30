@@ -37,7 +37,7 @@ TriNav™ consists of:
 
 Flat arrows with dark-gray hamburger:
 
-![TriNav Logo](TriNav_256.png)
+![TriNav Logo](icons/TriNav_256.png)
 
 (See `/icons` for all resolutions)
 
@@ -55,5 +55,6 @@ Flat arrows with dark-gray hamburger:
 ---
 
 ## 📂 Repository Structure
+
 
 
