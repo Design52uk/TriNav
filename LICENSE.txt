@@ -1,0 +1,12 @@
+TriNav™ Multi-Phase Navigation System
+Copyright © 2025 Mark. All Rights Reserved.
+
+Unauthorized copying, reproduction, distribution, modification,
+or use of this software, design, iconography, or documentation
+is strictly prohibited without written permission from the author.
+
+TriNav™ and its associated icon system, interaction model,
+state-machine behavior, and hybrid navigation symbol are the
+intellectual property of Mark.
+
+Developed collaboratively with ChatGPT as a design assistant.
