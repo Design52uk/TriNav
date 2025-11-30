@@ -1,7 +1,7 @@
 <!--
   ----------------------------------------------------------------------
   TriNav™ — Three-Phase Intelligent Navigation System
-  © 2025 Mark — All Rights Reserved.
+  © 2025 Mark Roberts & Design52 — All Rights Reserved.
   Developed in collaboration with ChatGPT design assistance.
 
   This UI/UX pattern and icon behaviour sequence is an original design.
@@ -48,12 +48,7 @@
 </button>
 <div id="triNavHint" class="tri-hint">Tap again for full.</div>
 
-
-
-
-
-
-    <img src="assets/img/apple-icon-60x60.png" alt="IDP Logo" class="logo">
+    <img src="assets/img/icon-60x60.png" alt="IDP Logo" class="logo">
     <span class="title">TriNAV</span>
   </div>
 
@@ -93,3 +88,4 @@
 <script src="assets/js/desktop-nav.js"></script>
 </body>
 </html>
+
