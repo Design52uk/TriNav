@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------
    TriNav™ — Three-Phase Intelligent Navigation System
-   © 2025 Mark — All Rights Reserved.
+   © 2025 Mark Roberts & Design52 — All Rights Reserved.
    Developed with ChatGPT design assistance.
    Version: TriNav™ v1.0
 ---------------------------------------------------------------------- */
@@ -92,6 +92,7 @@ applyNavState = function () {
     showTriNavHint();
   }
 };
+
 
 
 
