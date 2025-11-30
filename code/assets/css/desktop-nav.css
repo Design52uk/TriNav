@@ -1,0 +1,559 @@
+/* ----------------------------------------------------------------------
+   TriNav™ — Three-Phase Intelligent Navigation System
+   © 2025 Mark — All Rights Reserved.
+   Developed in collaboration with ChatGPT design assistance.
+
+   Description:
+   TriNav™ is a multi-phase navigation interface featuring:
+   - Phase 0: Closed state with hover-revealed expansion cues
+   - Phase 1: Mini sidebar expansion with partial arrow indicators
+   - Phase 2: Full sidebar expansion with dual arrow indicators
+   - Icon-driven visual signalling across all phases
+   - Automatic hint system (“Tap again for full.”), shown once only
+   - Intelligent collapse triggered by outside-click detection
+
+   This UI/UX pattern and icon behaviour sequence is an original design.
+   TriNav™ is protected under UK and international copyright law.
+   Redistribution, reproduction, or commercial use requires permission.
+
+   Version: TriNav™ v1.0
+---------------------------------------------------------------------- */
+
+@charset "utf-8";
+/* CLEAN DESKTOP NAVIGATION CSS */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* -------------------------------------------------------------
+   TOP NAVBAR
+------------------------------------------------------------- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background: #0f0f0f;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 1000;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  height: 30px;
+  width: 30px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nav-right i {
+  font-size: 20px;
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+/* -------------------------------------------------------------
+   MENU ICON (Hamburger + double arrows)
+------------------------------------------------------------- */
+
+.menu-hybrid-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: white;
+}
+
+.hybrid-svg {
+  transition: transform 0.25s ease;
+}
+
+/* Hamburger default */
+.hamburger {
+  stroke: white;
+  transition: stroke 0.25s ease;
+}
+
+/* Double arrows - default hidden */
+.arrow1,
+.arrow2 {
+  stroke: #F4F4F3;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease, stroke 0.25s ease;
+}
+
+/* Starting positions for animations */
+.arrow1 {
+  transform: translateX(0); /* always in place */
+}
+.arrow2 {
+  transform: translateX(-6px);
+}
+.menu-hybrid-icon[data-state="1"] .arrow1,
+.menu-hybrid-icon[data-state="2"] .arrow1 {
+  transform: translateX(0) !important;
+}
+
+/* -------------------------------------------------------------
+   STATE 0 — CLOSED (arrows only show on hover)
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="0"] .hamburger {
+  stroke: white;
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .hamburger {
+  stroke: #626262;
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .arrow1,
+.menu-hybrid-icon[data-state="0"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .arrow2 {
+  transform: translateX(2px);
+}
+
+.menu-hybrid-icon[data-state="0"]:hover svg {
+  transform: scale(1.05);
+}
+
+/* -------------------------------------------------------------
+   STATE 1 — MINI SIDEBAR
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="1"] .hamburger {
+  stroke: #272727;
+}
+
+.menu-hybrid-icon[data-state="1"] .arrow1 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="1"] .arrow2 {
+  opacity: 1;
+  stroke: #8D8D8D;
+  transform: translateX(2px);
+}
+
+/* Prevent hover from overriding this state */
+.menu-hybrid-icon[data-state="1"]:hover .arrow1,
+.menu-hybrid-icon[data-state="1"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------
+   STATE 2 — FULL SIDEBAR
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="2"] .hamburger {
+  stroke: #272727;
+}
+
+.menu-hybrid-icon[data-state="2"] .arrow1 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="2"] .arrow2 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(2px);
+}
+
+/* Prevent hover from overriding this state */
+.menu-hybrid-icon[data-state="2"]:hover .arrow1,
+.menu-hybrid-icon[data-state="2"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------
+   SIDEBAR
+------------------------------------------------------------- */
+
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  background: #111;
+  border-right: 1px solid #222;
+  overflow: hidden;
+  transition: width 0.25s ease, transform 0.25s ease;
+  z-index: 900;
+}
+
+.sidebar-hidden {
+  width: 0;
+  transform: translateX(-260px);
+}
+
+.sidebar-mini {
+  width: 72px;
+  transform: translateX(0);
+}
+
+.sidebar-full {
+  width: 240px;
+  transform: translateX(0);
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+.sidebar nav a i {
+  font-size: 20px;
+  min-width: 20px;
+}
+
+.sidebar nav a:hover {
+  background: #1e1e1e;
+}
+
+.sidebar-mini .text {
+  display: none;
+}
+
+/* -------------------------------------------------------------
+   CONTENT AREA SHIFTING
+------------------------------------------------------------- */
+.content {
+  margin-top: 60px;
+  padding: 24px;
+  transition: margin-left 0.25s ease;
+}
+
+.content.with-hidden {
+  margin-left: 0;
+}
+
+.content.with-mini {
+  margin-left: 72px;
+}
+
+.content.with-full {
+  margin-left: 240px;
+}
+@charset "utf-8";
+/* CLEAN DESKTOP NAVIGATION CSS */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* -------------------------------------------------------------
+   TOP NAVBAR
+------------------------------------------------------------- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background: #0f0f0f;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 1000;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  height: 30px;
+  width: 30px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nav-right i {
+  font-size: 20px;
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+/* -------------------------------------------------------------
+   MENU ICON (Hamburger + double arrows)
+------------------------------------------------------------- */
+
+.menu-hybrid-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: white;
+}
+
+.hybrid-svg {
+  transition: transform 0.25s ease;
+}
+
+/* Hamburger default */
+.hamburger {
+  stroke: white;
+  transition: stroke 0.25s ease;
+}
+
+/* Double arrows - default hidden */
+.arrow1,
+.arrow2 {
+  stroke: #F4F4F3;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease, stroke 0.25s ease;
+}
+
+/* Starting positions for animations */
+.arrow1 {
+  transform: translateX(-4px);
+}
+.arrow2 {
+  transform: translateX(-6px);
+}
+
+/* -------------------------------------------------------------
+   STATE 0 — CLOSED (arrows only show on hover)
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="0"] .hamburger {
+  stroke: white;
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .hamburger {
+  stroke: #626262;
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .arrow1,
+.menu-hybrid-icon[data-state="0"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="0"]:hover .arrow2 {
+  transform: translateX(2px);
+}
+
+.menu-hybrid-icon[data-state="0"]:hover svg {
+  transform: scale(1.05);
+}
+
+/* -------------------------------------------------------------
+   STATE 1 — MINI SIDEBAR
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="1"] .hamburger {
+  stroke: #272727;
+}
+
+.menu-hybrid-icon[data-state="1"] .arrow1 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="1"] .arrow2 {
+  opacity: 1;
+  stroke: #8D8D8D;
+  transform: translateX(2px);
+}
+
+/* Prevent hover from overriding this state */
+.menu-hybrid-icon[data-state="1"]:hover .arrow1,
+.menu-hybrid-icon[data-state="1"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------
+   STATE 2 — FULL SIDEBAR
+------------------------------------------------------------- */
+
+.menu-hybrid-icon[data-state="2"] .hamburger {
+  stroke: #272727;
+}
+
+.menu-hybrid-icon[data-state="2"] .arrow1 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(0);
+}
+
+.menu-hybrid-icon[data-state="2"] .arrow2 {
+  opacity: 1;
+  stroke: white;
+  transform: translateX(2px);
+}
+
+/* Prevent hover from overriding this state */
+.menu-hybrid-icon[data-state="2"]:hover .arrow1,
+.menu-hybrid-icon[data-state="2"]:hover .arrow2 {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------
+   SIDEBAR
+------------------------------------------------------------- */
+
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  background: #111;
+  border-right: 1px solid #222;
+  overflow: hidden;
+  transition: width 0.25s ease, transform 0.25s ease;
+  z-index: 900;
+}
+
+.sidebar-hidden {
+  width: 0;
+  transform: translateX(-260px);
+}
+
+.sidebar-mini {
+  width: 72px;
+  transform: translateX(0);
+}
+
+.sidebar-full {
+  width: 240px;
+  transform: translateX(0);
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+.sidebar nav a i {
+  font-size: 20px;
+  min-width: 20px;
+}
+
+.sidebar nav a:hover {
+  background: #1e1e1e;
+}
+
+.sidebar-mini .text {
+  display: none;
+}
+
+/* -------------------------------------------------------------
+   CONTENT AREA SHIFTING
+------------------------------------------------------------- */
+.content {
+  margin-top: 60px;
+  padding: 24px;
+  transition: margin-left 0.25s ease;
+}
+
+.content.with-hidden {
+  margin-left: 0;
+}
+
+.content.with-mini {
+  margin-left: 72px;
+}
+
+.content.with-full {
+  margin-left: 240px;
+}
+/* -------------------------- */
+/* TRI-NAV ONE-TIME HINT      */
+/* -------------------------- */
+
+.tri-hint {
+  position: absolute;
+  top: 65px;       /* slightly below icon */
+  left: 12px;
+  background: #1c1c1c;
+  border: 1px solid #333;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 2000;
+  white-space: nowrap;
+}
+
+/* Visible state */
+.tri-hint.show {
+  opacity: 1;
+}
+
+
+
